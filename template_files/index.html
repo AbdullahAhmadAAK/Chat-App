@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Include jQuery from a CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded shadow-md w-80">
+      <h2 class="text-xl font-semibold mb-4">Login</h2>
+      <form action="javascript:void(0)" id="loginForm">
+        <input type="hidden" name="attemptLogin">
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700">Username</label>
+          <input type="text" name="username_email" required class="mt-1 px-3 py-2 block w-full rounded-md border border-gray-300 focus:ring focus:ring-indigo-300 focus:border-indigo-300">
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700">Password</label>
+          <input type="password" name="password" required class="mt-1 px-3 py-2 block w-full rounded-md border border-gray-300 focus:ring focus:ring-indigo-300 focus:border-indigo-300">
+        </div>
+        <a href="signup.html" class="underline hover:no-underline text-blue-600 hover:text-blue-800 visited:text-purple-600 float-right mb-4">Don't have an account?</a>
+        <button type="submit" class="w-full bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600">Login</button>
+      </form>
+    </div>
+  
+    <script>
+      // Define the function before the form
+      const attemptLogin = () => {
+          let formData = new FormData($("#loginForm")[0]);
+          $.ajax({
+              url: "../controller_files/index_controller.php",
+              method: "POST",
+              data: formData,
+              processData: false,
+              contentType: false,
+              beforeSend: function () {
+                  
+              },
+              success: function (response) {
+                  let resp = JSON.parse(response);
+                  alert(resp.content);
+              },
+              error: function (xhr, status, error) {
+  
+              }
+          })
+      }
+  
+      // Add an event listener to the form's submit event
+      document.getElementById('loginForm').addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent the default form submission
+          attemptLogin(); // Call your function
+      });
+    </script>
+  </body>
+  
+</html>
