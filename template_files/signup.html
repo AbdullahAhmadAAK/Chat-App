@@ -73,8 +73,11 @@
                             $("#usernameEmailError").removeClass("p-2");
                             $("#passwordError").removeClass("p-2"); 
 
-                            // display notification
-                            $('#successMessage').removeClass('hidden');
+                            $('#successMessage').removeClass('hidden'); // display notification
+                            setTimeout(() => { // after 2 seconds gap
+                                window.location.href = "http://localhost/chat-app/template_files/index.html"; // redirect to login page
+                            }, 2000);
+                            
                         }
 
                         else { // if errors contained
